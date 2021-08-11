@@ -12,13 +12,17 @@ import Routes from './routes/route.js';
 dotenv.config();
 const app = express();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
+const URL = `mongodb+srv://${username}:${password}@cluster0.3uwtk.mongodb.net/flipkart?retryWrites=true&w=majority`;
 
-Connection(username, password);
+Connection(process.env.MONGOURI || URL);
 
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
 app.listen(PORT, () => console.log(`Server is running successfully on PORT ${PORT}`));
 DefaultData();
 
