@@ -23,7 +23,7 @@ export const userSignUp = async (request, response) => {
         const user = request.body;
         const newUser = new User(user);
         await newUser.save();
-        response.status(200).json(`${user.firstName} has been successfully registered`);
+        response.status(200).json(`${user.firstname} has been successfully registered`);
         
     } catch (error) {
         response.json('Error: ', error.message);
